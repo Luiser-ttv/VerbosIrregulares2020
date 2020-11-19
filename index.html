@@ -23,6 +23,7 @@
     <div class="container">
 
         <div class="row">
+            <button id="marcador" class="btn btn-block btn-primary">0</button>
             <button id="castellano" class="btn btn-block btn-secondary">Castellano</button>
         </div>
         <br>
@@ -54,25 +55,35 @@
         var tiempoElegido = 0;
         var verboElegido = 0;
         var jugando = 0;
+        var marcador = 0;
 
         function comprueba() {
             if (jugando == 0) {
                 jugando = 1;
-                
+
                 var verboLeido = document.getElementById('caja').value;
 
+                document.getElementById('botonResultado').classList.remove('btn-dark');
+                document.getElementById('botonResultado').classList.remove('btn-success');
+                document.getElementById('botonResultado').classList.remove('btn-danger');
+
                 if (verbos[verboElegido][tiempoElegido] == verboLeido) {
-                    document.getElementById('botonResultado').classList.remove('btn-dark');
+                    marcador++;
                     document.getElementById('botonResultado').classList.add('btn-success');
                     document.getElementById('botonResultado').innerText = "Correcto";
                 } else {
-                    document.getElementById('botonResultado').classList.remove('btn-dark');
                     document.getElementById('botonResultado').classList.add('btn-danger');
                     document.getElementById('botonResultado').innerText = verbos[verboElegido][tiempoElegido];
                 }
 
+            } else {
+                marcador = 0;
+                document.getElementById('botonResultado').classList.add('btn-dark');
+                document.getElementById('botonResultado').innerText = "Comprobar";
+                jugando = 0;
+                eligeVerbo();
             }
-
+            document.getElementById('marcador').innerText = marcador;
 
         }
 
